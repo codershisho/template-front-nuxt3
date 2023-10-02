@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  node:
+    image: codershisho/node:18.18.0-alpine
+    container_name: node-${PROJECT_NAME}
+    tty: true
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      TZ: ${TIME_ZONE}
+    ports:
+      - ${NODE_PORT}:3000
+      - 24678:24678 # HMR用のポートを追加
+    volumes:
+      - ${NOTE_MOUNT_FOLDER}:/var/www
+    stdin_open: true
+    restart: always
